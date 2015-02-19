@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="base.definition" template="/WEB-INF/pages/mainTemplate.jsp">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/pages/header.jsp"></put-attribute>
+		<put-attribute name="menu" value="/WEB-INF/pages/menu.jsp"></put-attribute>
+		<put-attribute name="body" value=""></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/pages/footer.jsp"></put-attribute>
+	</definition>
+
+	<definition name="welcome" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/welcome.jsp"></put-attribute>
+	</definition>
+	<definition name="index" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/index.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajObiekt" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajObiekt.jsp"></put-attribute>
+	</definition>
+	<definition name="listaObiektow" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/listaObiektow.jsp"></put-attribute>
+	</definition>
+	<definition name="login" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/login.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajOdczyt" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajOdczyt.jsp"></put-attribute>
+	</definition>
+	<definition name="listaOdczytow" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/listaOdczytow.jsp"></put-attribute>
+	</definition>
+	<definition name="calkowiteZuzycie" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/pages/calkowiteZuzycie.jsp"></put-attribute>
+	</definition>
+	<definition name="jednostkoweZuzycie" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/pages/jednostkoweZuzycie.jsp"></put-attribute>
+	</definition>
+	<definition name="calkowiteKoszty" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/calkowiteKoszty.jsp"></put-attribute>
+	</definition>
+	<definition name="jednostkoweKoszty" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/pages/jednostkoweKoszty.jsp"></put-attribute>
+	</definition>
+	<definition name="listaOdczytowPLN" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/pages/listaOdczytowPLN.jsp"></put-attribute>
+	</definition>
+	<definition name="otworzObiekt" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/otworzObiekt.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajUzytkownika" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/pages/dodajUzytkownika.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajBup" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajBup.jsp"></put-attribute>
+	</definition>
+	<definition name="listaBup" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/listaBup.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajBukip" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajBukip.jsp"></put-attribute>
+	</definition>
+	<definition name="listaBukip" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/listaBukip.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajUrbisPwik" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajUrbisPwik.jsp"></put-attribute>
+	</definition>
+	<definition name="listaUrbisPwik" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/listaUrbisPwik.jsp"></put-attribute>
+	</definition>
+	<definition name="dodawanieTest" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodawanieTest.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajZuzycieBup" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajZuzycieBup.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajZuzycieBukip" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajZuzycieBukip.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajZuzycieUrbisPwik" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajZuzycieUrbisPwik.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajBj" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajBj.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajZuzycieBj" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajZuzycieBj.jsp"></put-attribute>
+	</definition>
+	<definition name="listaBj" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/listaBj.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajBw" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajBw.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajZuzycieBw" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajZuzycieBw.jsp"></put-attribute>
+	</definition>
+	<definition name="listaBw" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/listaBw.jsp"></put-attribute>
+	</definition>
+	<definition name="dodajTest" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/dodajTest.jsp"></put-attribute>
+	</definition>
+		<definition name="transport" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/transport.jsp"></put-attribute>
+	</definition>
+	<definition name="oswietlenie" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/oswietlenie.jsp"></put-attribute>
+	</definition>
+		<definition name="biznes2013" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/biznes2013.jsp"></put-attribute>
+	</definition>
+			<definition name="bie2013" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/bie2013.jsp"></put-attribute>
+	</definition>
+
+</tiles-definitions>
