@@ -11,7 +11,10 @@
 <body>
 
 <sql:query var="transporty" dataSource="${postgres}">
-select * from transport</sql:query>
+select transportszczegolowo, 
+mwrok, 
+gjrok, 
+co2rok  from transport</sql:query>
 
 <div style="width: 90%; margin-left: 5%">
 		<table style="font-size: 12px" id="odczytTable"
@@ -34,7 +37,7 @@ select * from transport</sql:query>
 						<td align="center"><c:out value="${transport.gjrok}" /></td>
 						<td align="center"><c:out value="${transport.co2rok}" /></td>
 						<td><a href="edytujOdczyt.html?id=${transport.co2rok}"
-							style="font-style: oblique;"> Edytuj</a></td>
+							style="font-style: oblique;">Edytuj</a></td>
 					</tr>
 				</c:forEach>
 				<tr>
