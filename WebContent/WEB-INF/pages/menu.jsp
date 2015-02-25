@@ -148,10 +148,10 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-list-alt text-primary"></span><a href="bie2013.html"> Raport BIE 2013</a>
+                                        <span class="glyphicon glyphicon-list-alt text-primary"></span><a href="bie2013.html"> Raport  BIE 2013</a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr> 
                                     <td>
                                         <span class="glyphicon glyphicon-list-alt text-primary"></span><a href="calkowiteZuzycie.html"> Całkowite zużycie</a>
                                     </td>
