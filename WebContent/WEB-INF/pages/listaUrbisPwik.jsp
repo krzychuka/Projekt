@@ -49,9 +49,9 @@
 	<h2 align="center">Urbis Pwik</h2>
 	<br></br>
 
-	<sql:query var="urbispwiks" dataSource="${postgres}">
+<%-- 	<sql:query var="bups" dataSource="${postgres}">
 select nazwa, adres, powierzchnia, liczba_uzytkownikow,
-urbispwikid, 
+bupid, 
 round(cast(bap as numeric), 2) as roundbap, 
 round(cast(co as numeric), 2) as roundco, 
 round(cast(co2 as numeric), 2) as roundco2, 
@@ -60,9 +60,9 @@ round(cast(so2 as numeric), 2) as roundso2,
 round(cast(nox as numeric), 2) as roundnox, 
 round(cast(pyl as numeric), 2) as roundpyl, 
 round(cast(rok as numeric), 0) as roundrok
-from urbispwik
-inner join zuzycie_urbis_pwik using (urbispwikid)
-</sql:query>
+from bup
+inner join zuzycie_bup using (bupid)
+</sql:query> --%>
 
 	<div style="width: 90%; margin-left: 5%">
 		<table style="font-size: 12px" id="odczytTable"
@@ -75,32 +75,59 @@ inner join zuzycie_urbis_pwik using (urbispwikid)
 					<th><center>Adres</center></th>
 					<th><center>Powierzchnia</center></th>
 					<th><center>Liczba użytkowników</center></th>
-					<th><center>Zużycie finalne</center></th>
+					<th><center>Zużycie</center></th>
+					<%-- <th><center>Zużycie finalne</center></th>
 					<th><center>SO2</center></th>
 					<th><center>Nox</center></th>
 					<th><center>CO</center></th>
 					<th><center>Pył</center></th>
 					<th><center>CO2</center></th>
 					<th><center>BaP</center></th>
-					<th><center>Rok</center></th>
+					<th><center>Rok</center></th> --%>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="urbispwik" items="${urbispwiks.rows}">
+				<%-- <c:forEach var="bup" items="${bups.rows}">
 					<tr>
-						<td style="display: none;"><c:out value="${urbispwik.urbispwikid}" /></td>
-						<td align="center"><c:out value="${urbispwik.nazwa}" /></td>
-						<td align="center"><c:out value="${urbispwik.adres}" /></td>
-						<td align="center"><c:out value="${urbispwik.powierzchnia}" /></td>
-						<td align="center"><c:out value="${urbispwik.liczba_uzytkownikow}" /></td>
-						<td align="center"><c:out value="${urbispwik.roundzuzyciefinalne}" /></td>
-						<td align="center"><c:out value="${urbispwik.roundso2}" /></td>
-						<td align="center"><c:out value="${urbispwik.roundnox}" /></td>
-						<td align="center"><c:out value="${urbispwik.roundco}" /></td>
-						<td align="center"><c:out value="${urbispwik.roundpyl}" /></td>
-						<td align="center"><c:out value="${urbispwik.roundco2}" /></td>
-						<td align="center"><c:out value="${urbispwik.roundbap}" /></td>
-						<td align="center"><c:out value="${urbispwik.roundrok}" /></td>
+						<td style="display: none;"><c:out value="${bup.bupid}" /></td>
+						<td align="center"><c:out value="${bup.nazwa}" /></td>
+						<td align="center"><c:out value="${bup.adres}" /></td>
+						<td align="center"><c:out value="${bup.powierzchnia}" /></td>
+						<td align="center"><c:out value="${bup.liczba_uzytkownikow}" /></td>
+						<td align="center">
+								<a href="otworzBup.html?id=${bup.bupid}"
+								style="height: 30px; font-size: 15px; font-style: oblique;">Zużycie</a></td>
+						<td align="center"><c:out value="${bup.roundzuzyciefinalne}" /></td>
+						<td align="center"><c:out value="${bup.roundso2}" /></td>
+						<td align="center"><c:out value="${bup.roundnox}" /></td>
+						<td align="center"><c:out value="${bup.roundco}" /></td>
+						<td align="center"><c:out value="${bup.roundpyl}" /></td>
+						<td align="center"><c:out value="${bup.roundco2}" /></td>
+						<td align="center"><c:out value="${bup.roundbap}" /></td>
+						<td align="center"><c:out value="${bup.roundrok}" /></td>
+					</tr>
+				</c:forEach> --%>
+				<c:forEach items="${urbisPwiks}" var="urbisPwik">
+					<tr>
+						<td style="display: none;"><center>
+								<c:out value="${urbisPwik.id}" />
+							</center></td>
+						<td><center>
+								<c:out value="${urbisPwik.nazwa}" />
+							</center></td>
+						<td><center>
+								<c:out value="${urbisPwik.adres}" />
+							</center></td>
+						<td><center>
+								<c:out value="${urbisPwik.powierzchnia}" />
+							</center></td>
+						<td><center>
+								<c:out value="${urbisPwik.liczbaUzytkownikow}" />
+							</center></td>
+						<td align="center"><a href="otworzUrbisPwik.html?id=${urbisPwik.id}"
+							style="height: 30px; font-size: 15px; font-style: oblique;">Zużycie</a>
+							<a href="editUrbisPwik.html?id=${urbisPwik.id}"
+							style="height: 30px; font-size: 15px; font-style: oblique;">Edytuj</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

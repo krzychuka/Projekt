@@ -137,6 +137,18 @@
 		<put-attribute name="title" value="Projekt1"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/pages/listaBw.jsp"></put-attribute>
 	</definition>
+	<definition name="szczegolyBup" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/szczegolyBup.jsp"></put-attribute>
+	</definition>
+	<definition name="szczegolyBukip" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/szczegolyBukip.jsp"></put-attribute>
+	</definition>
+	<definition name="szczegolyUrbisPwik" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/szczegolyUrbisPwik.jsp"></put-attribute>
+	</definition>
 	<definition name="dodajTest" extends="base.definition">
 		<put-attribute name="title" value="Projekt1"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/pages/dodajTest.jsp"></put-attribute>

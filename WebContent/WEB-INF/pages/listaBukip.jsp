@@ -49,9 +49,9 @@
 	<h2 align="center">Bukip</h2>
 	<br></br>
 
-	<sql:query var="bukips" dataSource="${postgres}">
+<%-- 	<sql:query var="bups" dataSource="${postgres}">
 select nazwa, adres, powierzchnia, liczba_uzytkownikow,
-bukipid, 
+bupid, 
 round(cast(bap as numeric), 2) as roundbap, 
 round(cast(co as numeric), 2) as roundco, 
 round(cast(co2 as numeric), 2) as roundco2, 
@@ -60,9 +60,9 @@ round(cast(so2 as numeric), 2) as roundso2,
 round(cast(nox as numeric), 2) as roundnox, 
 round(cast(pyl as numeric), 2) as roundpyl, 
 round(cast(rok as numeric), 0) as roundrok
-from bukip
-inner join zuzycie_bukip using (bukipid)
-</sql:query>
+from bup
+inner join zuzycie_bup using (bupid)
+</sql:query> --%>
 
 	<div style="width: 90%; margin-left: 5%">
 		<table style="font-size: 12px" id="odczytTable"
@@ -75,32 +75,59 @@ inner join zuzycie_bukip using (bukipid)
 					<th><center>Adres</center></th>
 					<th><center>Powierzchnia</center></th>
 					<th><center>Liczba użytkowników</center></th>
-					<th><center>Zużycie finalne</center></th>
+					<th><center>Zużycie</center></th>
+					<%-- <th><center>Zużycie finalne</center></th>
 					<th><center>SO2</center></th>
 					<th><center>Nox</center></th>
 					<th><center>CO</center></th>
 					<th><center>Pył</center></th>
 					<th><center>CO2</center></th>
 					<th><center>BaP</center></th>
-					<th><center>Rok</center></th>
+					<th><center>Rok</center></th> --%>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="bukip" items="${bukips.rows}">
+				<%-- <c:forEach var="bup" items="${bups.rows}">
 					<tr>
-						<td style="display: none;"><c:out value="${bukip.bukipid}" /></td>
-						<td align="center"><c:out value="${bukip.nazwa}" /></td>
-						<td align="center"><c:out value="${bukip.adres}" /></td>
-						<td align="center"><c:out value="${bukip.powierzchnia}" /></td>
-						<td align="center"><c:out value="${bukip.liczba_uzytkownikow}" /></td>
-						<td align="center"><c:out value="${bukip.roundzuzycieFinalne}" /></td>
-						<td align="center"><c:out value="${bukip.roundso2}" /></td>
-						<td align="center"><c:out value="${bukip.roundnox}" /></td>
-						<td align="center"><c:out value="${bukip.roundco}" /></td>
-						<td align="center"><c:out value="${bukip.roundpyl}" /></td>
-						<td align="center"><c:out value="${bukip.roundco2}" /></td>
-						<td align="center"><c:out value="${bukip.roundbap}" /></td>
-						<td align="center"><c:out value="${bukip.roundrok}" /></td>
+						<td style="display: none;"><c:out value="${bup.bupid}" /></td>
+						<td align="center"><c:out value="${bup.nazwa}" /></td>
+						<td align="center"><c:out value="${bup.adres}" /></td>
+						<td align="center"><c:out value="${bup.powierzchnia}" /></td>
+						<td align="center"><c:out value="${bup.liczba_uzytkownikow}" /></td>
+						<td align="center">
+								<a href="otworzBup.html?id=${bup.bupid}"
+								style="height: 30px; font-size: 15px; font-style: oblique;">Zużycie</a></td>
+						<td align="center"><c:out value="${bup.roundzuzyciefinalne}" /></td>
+						<td align="center"><c:out value="${bup.roundso2}" /></td>
+						<td align="center"><c:out value="${bup.roundnox}" /></td>
+						<td align="center"><c:out value="${bup.roundco}" /></td>
+						<td align="center"><c:out value="${bup.roundpyl}" /></td>
+						<td align="center"><c:out value="${bup.roundco2}" /></td>
+						<td align="center"><c:out value="${bup.roundbap}" /></td>
+						<td align="center"><c:out value="${bup.roundrok}" /></td>
+					</tr>
+				</c:forEach> --%>
+				<c:forEach items="${bukips}" var="bukip">
+					<tr>
+						<td style="display: none;"><center>
+								<c:out value="${bukip.id}" />
+							</center></td>
+						<td><center>
+								<c:out value="${bukip.nazwa}" />
+							</center></td>
+						<td><center>
+								<c:out value="${bukip.adres}" />
+							</center></td>
+						<td><center>
+								<c:out value="${bukip.powierzchnia}" />
+							</center></td>
+						<td><center>
+								<c:out value="${bukip.liczbaUzytkownikow}" />
+							</center></td>
+						<td align="center"><a href="otworzBukip.html?id=${bukip.id}"
+							style="height: 30px; font-size: 15px; font-style: oblique;">Zużycie</a>
+							<a href="editBukip.html?id=${bukip.id}"
+							style="height: 30px; font-size: 15px; font-style: oblique;">Edytuj</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

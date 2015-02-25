@@ -5,9 +5,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
-public class ZuzycieBupBean {
-
-	private Long id;
+public class ZuzycieBeanWzorzec {
 	
 	@NotNull(message="Proszê wype³niæ pole")
 	@NumberFormat(style=Style.NUMBER)
@@ -38,15 +36,6 @@ public class ZuzycieBupBean {
 	private Double baP;
 	
 	private Double rok;
-	private Long beanBupId;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Double getFinalne() {
 		return finalne;
@@ -110,14 +99,6 @@ public class ZuzycieBupBean {
 
 	public void setRok(Double rok) {
 		this.rok = rok;
-	}
-
-	public Long getBeanBupId() {
-		return beanBupId;
-	}
-
-	public void setBeanBupId(Long beanBupId) {
-		this.beanBupId = beanBupId;
 	}
 
 }

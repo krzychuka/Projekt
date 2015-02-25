@@ -2,14 +2,14 @@ package bean;
 
 public class UrbisPwikBean extends BudynekWzorzec{
 	
-	private Long urbisPwikId;
+	private Long id;
 
-	public Long getUrbisPwikId() {
-		return urbisPwikId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setUrbisPwikId(Long urbisPwikId) {
-		this.urbisPwikId = urbisPwikId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

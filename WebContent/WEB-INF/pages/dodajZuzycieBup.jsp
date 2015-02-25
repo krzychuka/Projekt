@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@page language="Java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <html>
 <head>
 
@@ -19,32 +19,205 @@
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/js/jquery.validate.js"></script>
 <script type="text/javascript"
-	src="<%= request.getContextPath() %>/resources/js/messages_pl.js"></script>
+	src="<%=request.getContextPath()%>/resources/js/messages_pl.js"></script>
 
 <title>Insert title here</title>
 
 <script type="text/javascript">
 	function run() {
-		document.getElementById("srt1").value = document
-				.getElementById("bupNazwa").value.match(/\(([^)]+)\)/)[1];
+		document.getElementById("srt1").value = document.getElementById("srt").value
+				.match(/\(([^)]+)\)/)[1];
+
+		document.getElementById("inputRok").value = document.getElementById("selectRok").value;
 	}
+</script>
+
+<script>
+	$(document).ready(
+			function() {
+
+				$('#contact-form').validate(
+						{
+							rules : {
+								finalne : {
+									required : true,
+									number : true
+								},
+								sO2 : {
+									required : true,
+									number : true
+								},
+								nox : {
+									required : true,
+									number : true
+								},
+								cO2 : {
+									required : true,
+									number : true
+								},
+								pyl : {
+									required : true,
+									number : true
+								},
+								cO : {
+									required : true,
+									number : true
+								},
+								baP : {
+									required : true,
+									number : true
+								}
+							},
+							highlight : function(element) {
+								$(element).closest('.control-group')
+										.removeClass('has-success has-feedback').addClass(
+												'has-error');
+							},
+							success : function(element) {
+								element.text('').addClass('valid').closest(
+										'.control-group').removeClass(
+										'has-error').addClass('has-success has-feedback');
+							},
+							errorElement : 'span',
+							errorClass : 'help-block',
+							errorPlacement : function(error, element) {
+								if (element.parent('.input-group').length) {
+									error.insertAfter(element.parent());
+								} else {
+									error.insertAfter(element);
+								}
+							}
+						});
+			}); // end document.ready
 </script>
 
 </head>
 <body>
-<sql:setDataSource var="postgres" driver="org.postgresql.Driver"
-	url="jdbc:postgresql://localhost:5432/postgres" user="postgres"
-	password="admin" scope="session" />
+	<sql:setDataSource var="postgres" driver="org.postgresql.Driver"
+		url="jdbc:postgresql://localhost:5432/postgres" user="postgres"
+		password="admin" scope="session" />
 
-<sql:query var="bup" dataSource="${postgres}">
+	<sql:query var="bup" dataSource="${postgres}">
 select nazwa, bupid from bup
 </sql:query>
 
-<h1 align="center">
-		Dodaj Bup
-		</h1>
 
-		<form:form method="POST" action="/Projekt/saveZuzycieBup.html" 
+	<h1 align="center">Dodaj zużycie Bup</h1>
+	<div class="container-fluid col-md-offset-3 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Dodaj zużycie</h3>
+			</div>
+			<div class="panel-body">
+				<form:form class="form-horizontal" method="POST" id="contact-form"
+					action="/Projekt/saveZuzycieBup.html">
+					<div class="control-group" style="display: none;">
+						<form:label path="id" class="control-label col-md-offset-1">Id zużycie Bup</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="id"
+								value="${zuzycieBup.id}" readonly="readonly" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label col-md-offset-1">Bup nazwa</label>
+						<div class="controls col-md-offset-1">
+							<%-- <form:input class="form-control" path="beanBupId" value="${zuzycieBup.beanBupId}"  /> --%>
+							<select name="bupNazwa" id="srt" class="form-control">
+								<c:forEach var="row" items="${bup.rows}">
+									<option>
+										<c:out value="${row.nazwa}" />
+										<c:out value="(${row.bupid})" />
+									</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					<div class="control-group" style="display: none;">
+						<form:label path="beanBupId" class="control-label col-md-offset-1">Bup id</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="beanBupId"
+								value="${zuzycieBup.beanBupId}" id="srt1"></form:input>
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label path="finalne" class="control-label col-md-offset-1">Finalne</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="finalne"
+								value="${zuzycieBup.finalne}"></form:input>
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label path="sO2" class="control-label col-md-offset-1">SO2</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="sO2"
+								value="${zuzycieBup.sO2}"></form:input>
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label path="nox" class="control-label col-md-offset-1">Nox</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="nox"
+								value="${zuzycieBup.nox}"></form:input>
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label path="cO2" class="control-label col-md-offset-1">CO2</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="cO2"
+								value="${zuzycieBup.cO2}"></form:input>
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label path="pyl" class="control-label col-md-offset-1">Pyl</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="pyl"
+								value="${zuzycieBup.pyl}"></form:input>
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label path="cO" class="control-label col-md-offset-1">CO</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="cO"
+								value="${zuzycieBup.cO}"></form:input>
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label path="baP" class="control-label col-md-offset-1">BaP</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="baP"
+								value="${zuzycieBup.baP}"></form:input>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label col-md-offset-1">Rok</label>
+						<div class="controls col-md-offset-1">
+							<%-- <form:input class="form-control" path="rok"
+								value="${zuzycieBup.rok}"></form:input> --%>
+							<select class="form-control" id="selectRok">
+								<option>2013</option>
+								<option>2020</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group" style="display: none;">
+						<form:label path="rok" class="control-label col-md-offset-1">Rok</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="rok" id="inputRok"
+								value="${zuzycieBup.rok}"></form:input>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-1 col-sm-2">
+							<button type="submit" class="btn btn-primary" onclick="run()">Dodaj</button>
+						</div>
+					</div>
+				</form:form>
+			</div>
+		</div>
+	</div>
+
+
+	<%-- 	<form:form method="POST" action="/Projekt/saveZuzycieBup.html" 
 			id="formularz">
 			<center>
 				<div id="accordion" style="width: 80%;">
@@ -115,6 +288,6 @@ select nazwa, bupid from bup
 			<center>
 				<input type="submit" value="Dodaj" onclick="run()"/>
 			</center>
-		</form:form>
+		</form:form> --%>
 </body>
 </html>

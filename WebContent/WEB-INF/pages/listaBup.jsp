@@ -49,7 +49,7 @@
 	<h2 align="center">Budynki użyteczności publicznej</h2>
 	<br></br>
 
-	<sql:query var="bups" dataSource="${postgres}">
+<%-- 	<sql:query var="bups" dataSource="${postgres}">
 select nazwa, adres, powierzchnia, liczba_uzytkownikow,
 bupid, 
 round(cast(bap as numeric), 2) as roundbap, 
@@ -62,7 +62,7 @@ round(cast(pyl as numeric), 2) as roundpyl,
 round(cast(rok as numeric), 0) as roundrok
 from bup
 inner join zuzycie_bup using (bupid)
-</sql:query>
+</sql:query> --%>
 
 	<div style="width: 90%; margin-left: 5%">
 		<table style="font-size: 12px" id="odczytTable"
@@ -75,24 +75,28 @@ inner join zuzycie_bup using (bupid)
 					<th><center>Adres</center></th>
 					<th><center>Powierzchnia</center></th>
 					<th><center>Liczba użytkowników</center></th>
-					<th><center>Zużycie finalne</center></th>
+					<th><center>Zużycie</center></th>
+					<%-- <th><center>Zużycie finalne</center></th>
 					<th><center>SO2</center></th>
 					<th><center>Nox</center></th>
 					<th><center>CO</center></th>
 					<th><center>Pył</center></th>
 					<th><center>CO2</center></th>
 					<th><center>BaP</center></th>
-					<th><center>Rok</center></th>
+					<th><center>Rok</center></th> --%>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="bup" items="${bups.rows}">
+				<%-- <c:forEach var="bup" items="${bups.rows}">
 					<tr>
 						<td style="display: none;"><c:out value="${bup.bupid}" /></td>
 						<td align="center"><c:out value="${bup.nazwa}" /></td>
 						<td align="center"><c:out value="${bup.adres}" /></td>
 						<td align="center"><c:out value="${bup.powierzchnia}" /></td>
 						<td align="center"><c:out value="${bup.liczba_uzytkownikow}" /></td>
+						<td align="center">
+								<a href="otworzBup.html?id=${bup.bupid}"
+								style="height: 30px; font-size: 15px; font-style: oblique;">Zużycie</a></td>
 						<td align="center"><c:out value="${bup.roundzuzyciefinalne}" /></td>
 						<td align="center"><c:out value="${bup.roundso2}" /></td>
 						<td align="center"><c:out value="${bup.roundnox}" /></td>
@@ -101,6 +105,29 @@ inner join zuzycie_bup using (bupid)
 						<td align="center"><c:out value="${bup.roundco2}" /></td>
 						<td align="center"><c:out value="${bup.roundbap}" /></td>
 						<td align="center"><c:out value="${bup.roundrok}" /></td>
+					</tr>
+				</c:forEach> --%>
+				<c:forEach items="${bups}" var="bup">
+					<tr>
+						<td style="display: none;"><center>
+								<c:out value="${bup.id}" />
+							</center></td>
+						<td><center>
+								<c:out value="${bup.nazwa}" />
+							</center></td>
+						<td><center>
+								<c:out value="${bup.adres}" />
+							</center></td>
+						<td><center>
+								<c:out value="${bup.powierzchnia}" />
+							</center></td>
+						<td><center>
+								<c:out value="${bup.liczbaUzytkownikow}" />
+							</center></td>
+						<td align="center"><a href="otworzBup.html?id=${bup.id}"
+							style="height: 30px; font-size: 15px; font-style: oblique;">Zużycie</a>
+							<a href="editBup.html?id=${bup.id}"
+							style="height: 30px; font-size: 15px; font-style: oblique;">Edytuj</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

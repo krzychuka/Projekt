@@ -17,50 +17,176 @@
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/js/jquery.validate.js"></script>
 <script type="text/javascript"
-	src="<%= request.getContextPath() %>/resources/js/messages_pl.js"></script>
+	src="<%=request.getContextPath()%>/resources/js/messages_pl.js"></script>
+
+<script>
+	$(document).ready(
+			function() {
+
+				$('#contact-form').validate(
+						{
+							rules : {
+								nazwa : {
+									minlength : 2,
+									required : true
+								},
+								adres : {
+									minlength : 2,
+									required : true
+								},
+								powierzchnia : {
+									required : true,
+									number : true
+								},
+								liczbaUzytkownikow : {
+									required : true,
+									number : true
+								}
+							},
+							highlight : function(element) {
+								$(element).closest('.control-group')
+										.removeClass('has-success has-feedback').addClass(
+												'has-error');
+							},
+							success : function(element) {
+								element.text('').addClass('valid').closest(
+										'.control-group').removeClass(
+										'has-error').addClass('has-success has-feedback');
+							},
+							errorElement : 'span',
+							errorClass : 'help-block',
+							errorPlacement : function(error, element) {
+								if (element.parent('.input-group').length) {
+									error.insertAfter(element.parent());
+								} else {
+									error.insertAfter(element);
+								}
+							}
+						});
+			}); // end document.ready
+</script>
 
 <title>Insert title here</title>
 </head>
 <body>
 
-<h1 align="center">
-		Dodaj Bukip
-		</h1>
+	<h1 align="center">Dodaj Bukip</h1>
+	<div class="container-fluid col-md-offset-3 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Dodaj Bukip</h3>
+			</div>
+			<div class="panel-body">
+				<form:form class="form-horizontal" method="POST" id="contact-form"
+					action="/Projekt/saveBukip.html">
+					<div class="control-group" style="display: none">
+						<form:label path="id" class="control-label">Id bukip</form:label>
+						<div class="controls">
+							<form:input path="id" value="${bukip.id}" readonly="readonly" />
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label path="nazwa" class="control-label col-md-offset-1">Nazwa</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="nazwa"
+								value="${bukip.nazwa}"></form:input>
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label path="adres" class="control-label col-md-offset-1">Adres</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" path="adres"
+								value="${bukip.adres}"></form:input>
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label path="powierzchnia"
+							class="control-label col-md-offset-1">Powierzchnia</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" type="text" path="powierzchnia"
+								value="${bukip.powierzchnia}" />
+						</div>
+					</div>
+					<div class="control-group">
+						<form:label class="control-label col-md-offset-1"
+							path="liczbaUzytkownikow">Liczba
+						użytkowników</form:label>
+						<div class="controls col-md-offset-1">
+							<form:input class="form-control" type="text"
+								path="liczbaUzytkownikow" value="${bukip.liczbaUzytkownikow}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-1 col-sm-2">
+							<button type="submit" class="btn btn-primary">Dodaj</button>
+						</div>
+					</div>
+				</form:form>
+			</div>
+		</div>
+	</div>
 
-		<form:form method="POST" action="/Projekt/saveBukip.html" 
-			id="formularz">
-			<center>
-				<div id="accordion" style="width: 80%;">
-					<div>
-						<table align="center">
-							<tr>
+
+	<%-- <tr>
 								<td align="left">Nazwa:</td>
-								<td align="left"><input type="text" name="bukipNazwa"
-									value="${bukip.nazwa}" ></td>
+								<td align="left"><input type="text" name="bupNazwa"
+									value="${bup.nazwa}" ></td>
 							<tr />
 							<tr>
 								<td align="left">Adres:</td>
-								<td align="left"><input type="text" name="bukipAdres"
-									value="${bukip.adres}" ></td>
+								<td align="left"><input type="text" name="bupAdres"
+									value="${bup.adres}" ></td>
 							<tr />
 							<tr>
 								<td align="left">Powierzchnia:</td>
-								<td align="left"><input type="text" name="bukipPowierzchnia"
-									value="${bukip.powierzchnia}" ></td>
+								<td align="left"><input type="text" name="bupPowierzchnia"
+									value="${bup.powierzchnia}" ></td>
 							<tr />
 							<tr>
 								<td align="left">Liczba użytkowników:</td>
-								<td align="left"><input type="text" name="bukipLiczbaUzytkownikow"
-									value="${bukip.liczbaUzytkownikow}" ></td>
-							<tr />
-						</table>
-					</div>
-				</div>
-			</center>
-			<center>
-				<input type="submit" value="Dodaj"/>
-			</center>
-		</form:form>
+								<td align="left"><input type="text" name="bupLiczbaUzytkownikow"
+									value="${bup.liczbaUzytkownikow}" ></td>
+							<tr /> --%>
+	<!-- 							<tr> -->
+	<!-- 								<td align="left">Zużycie finalne:</td> -->
+	<!-- 								<td align="left"><input type="text" name="zuzycieFinalne" -->
+	<%-- 									value="${zuzycieBup.zuzycieFinalne}" ></td> --%>
+	<!-- 							<tr /> -->
+	<!-- 							<tr> -->
+	<!-- 								<td align="left">SO2:</td> -->
+	<!-- 								<td align="left"><input type="text" name="zuzycieSO2" -->
+	<%-- 									value="${zuzycieBup.zuzycieSO2}" ></td> --%>
+	<!-- 							<tr /> -->
+	<!-- 							<tr> -->
+	<!-- 								<td align="left">Nox:</td> -->
+	<!-- 								<td align="left"><input type="text" name="zuzycieNox" -->
+	<%-- 									value="${zuzycieBup.zuzycieNox}" ></td> --%>
+	<!-- 							<tr /> -->
+	<!-- 							<tr> -->
+	<!-- 								<td align="left">CO:</td> -->
+	<!-- 								<td align="left"><input type="text" name="zuzycieCO" -->
+	<%-- 									value="${zuzycieBup.zuzycieCO}" ></td> --%>
+	<!-- 							<tr /> -->
+	<!-- 							<tr> -->
+	<!-- 								<td align="left">Pył:</td> -->
+	<!-- 								<td align="left"><input type="text" name="zuzyciePyl" -->
+	<%-- 									value="${zuzycieBup.zuzyciePyl}" ></td> --%>
+	<!-- 							<tr /> -->
+	<!-- 							<tr> -->
+	<!-- 								<td align="left">CO2:</td> -->
+	<!-- 								<td align="left"><input type="text" name="zuzycieCO2" -->
+	<%-- 									value="${zuzycieBup.zuzycieCO2}" ></td> --%>
+	<!-- 							<tr /> -->
+	<!-- 							<tr> -->
+	<!-- 								<td align="left">BaP:</td> -->
+	<!-- 								<td align="left"><input type="text" name="zuzycieBaP" -->
+	<%-- 									value="${zuzycieBup.zuzycieBaP}" ></td> --%>
+	<!-- 							<tr /> -->
+	<!-- 							<tr> -->
+	<!-- 								<td align="left">Rok:</td> -->
+	<!-- 								<td align="left"><input type="text" name="zuzycieRok" -->
+	<%-- 									value="${zuzycieBup.zuzycieRok}" ></td> --%>
+	<!-- 							<tr /> -->
 </body>
 </body>
 </html>

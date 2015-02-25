@@ -1,13 +1,16 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.validation.Valid;
 
 import model.UrbisPwik;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.UrbisPwikService;
+import service.ZuzycieUrbisPwikService;
 import bean.UrbisPwikBean;
 
 @Controller
@@ -23,48 +27,51 @@ public class UrbisPwikController {
 	@Autowired
 	private UrbisPwikService urbisPwikService;
 	
-	@RequestMapping(value = "/urbisPwik.html", method = RequestMethod.GET)
-	public String urbisPwik(ModelMap model) {
+	@Autowired
+	private ZuzycieUrbisPwikService zuzycieUrbisPwikService;
+	
+	@RequestMapping(value = "/urbisPwik", method = RequestMethod.GET)
+	public ModelAndView urbisPwikModel(@ModelAttribute("command") UrbisPwikBean urbisPwikBean, BindingResult result) {
 
-		return "dodajUrbisPwik";
-
-	}
-
-	@RequestMapping(value = "/listaUrbisPwik.html", method = RequestMethod.GET)
-	public String listaUrbisPwik(ModelMap model) {
-
-		return "listaUrbisPwik";
+		return new ModelAndView("dodajUrbisPwik");
 
 	}
 	
-	@RequestMapping(value = "/saveUrbisPwik", method = RequestMethod.POST)
-	public ModelAndView saveUrbisPwik(@ModelAttribute("command") UrbisPwik urbisPwik, BindingResult result){
-		urbisPwik.setUrbisPwikNazwa(urbisPwik.getUrbisPwikNazwa());
-		urbisPwik.setUrbisPwikAdres(urbisPwik.getUrbisPwikAdres());
-		urbisPwik.setUrbisPwikPowierzchnia(urbisPwik.getUrbisPwikPowierzchnia());
-		urbisPwik.setUrbisPwikLiczbaUzytkownikow(urbisPwik.getUrbisPwikLiczbaUzytkownikow());
-		urbisPwikService.addUrbisPwik(urbisPwik);
-		return new ModelAndView("redirect:/urbisPwik.html");
-	}
-	
-	@RequestMapping(value = "/deleteUrbisPwik", method = RequestMethod.GET)
-	public ModelAndView deleteUrbisPwik(
-			@ModelAttribute("command") UrbisPwikBean urbisPwikBean, BindingResult result) {
-		urbisPwikService.deleteUrbisPwik(prepareModel(urbisPwikBean));
+	@RequestMapping(value = "/urbisPwiks.html", method = RequestMethod.GET)
+	public ModelAndView listaUrbisPwik() {
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("dodajUrbisPwik", null);
+		model.put("urbisPwiks", prepareListOfUrbisPwikBean(urbisPwikService.urbisPwikList()));
 		return new ModelAndView("listaUrbisPwik", model);
+
+	}
+
+	@RequestMapping(value = "/saveUrbisPwik", method = RequestMethod.POST)
+	public ModelAndView saveUrbisPwik(@ModelAttribute("command") @Valid UrbisPwikBean urbisPwikBean,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return new ModelAndView("dodajUrbisPwik");
+		} else {
+			UrbisPwik urbisPwik = prepareModel(urbisPwikBean);
+			urbisPwikService.addUrbisPwik(urbisPwik);
+			return new ModelAndView("redirect:/urbisPwiks.html");
+		}
 	}
 	
 	@RequestMapping(value = "/editUrbisPwik", method = RequestMethod.GET)
 	public ModelAndView editUrbisPwik(
 			@ModelAttribute("command") UrbisPwikBean urbisPwikBean, BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("urbisPwik", prepareUrbisPwikBean(urbisPwikService.getUrbisPwik(urbisPwikBean.getUrbisPwikId())));
+		model.put("urbisPwik", prepareUrbisPwikBean(urbisPwikService.getUrbisPwik(urbisPwikBean.getId())));
 		return new ModelAndView("dodajUrbisPwik", model);
 	}
 	
-	
+	@RequestMapping(value = "/otworzUrbisPwik", method = RequestMethod.GET)
+	public ModelAndView otworz(@ModelAttribute("command") UrbisPwikBean urbisPwikBean,
+			BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("urbisPwik", prepareUrbisPwikBean(urbisPwikService.getUrbisPwik(urbisPwikBean.getId())));
+		return new ModelAndView("szczegolyUrbisPwik", model);
+	}
 
 	private UrbisPwikBean prepareUrbisPwikBean(UrbisPwik urbisPwik) {
 		UrbisPwikBean bean = new UrbisPwikBean();
@@ -72,7 +79,7 @@ public class UrbisPwikController {
 		bean.setAdres(urbisPwik.getUrbisPwikAdres());
 		bean.setLiczbaUzytkownikow(urbisPwik.getUrbisPwikLiczbaUzytkownikow());
 		bean.setPowierzchnia(urbisPwik.getUrbisPwikPowierzchnia());
-		bean.setUrbisPwikId(urbisPwik.getUrbisPwikId());
+		bean.setId(urbisPwik.getUrbisPwikId());
 		return bean;
 	}
 
@@ -82,9 +89,29 @@ public class UrbisPwikController {
 		urbisPwik.setUrbisPwikAdres(urbisPwikBean.getAdres());
 		urbisPwik.setUrbisPwikLiczbaUzytkownikow(urbisPwikBean.getLiczbaUzytkownikow());
 		urbisPwik.setUrbisPwikPowierzchnia(urbisPwikBean.getPowierzchnia());
-		urbisPwik.setUrbisPwikId(urbisPwikBean.getUrbisPwikId());
-		urbisPwikBean.setUrbisPwikId(null);
+		urbisPwik.setUrbisPwikId(urbisPwikBean.getId());
+		urbisPwikBean.setId(null);
 		return urbisPwik;
 	}
+	
+	private List<UrbisPwikBean> prepareListOfUrbisPwikBean(List<UrbisPwik> urbisPwiks) {
+		List<UrbisPwikBean> beans = null;
+		if (urbisPwiks != null && !urbisPwiks.isEmpty()) {
+			beans = new ArrayList<UrbisPwikBean>();
+			UrbisPwikBean bean = null;
+			for (UrbisPwik urbisPwik : urbisPwiks) {
+				bean = new UrbisPwikBean();
+				bean.setId(urbisPwik.getUrbisPwikId());
+				bean.setNazwa(urbisPwik.getUrbisPwikNazwa());
+				bean.setAdres(urbisPwik.getUrbisPwikAdres());
+				bean.setPowierzchnia(urbisPwik.getUrbisPwikPowierzchnia());
+				bean.setLiczbaUzytkownikow(urbisPwik.getUrbisPwikLiczbaUzytkownikow());
+				beans.add(bean);
+			}
+		}
+		return beans;
+	}
+
+
 
 }

@@ -57,12 +57,12 @@
                                 </tr>
                                  <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-home text-primary"></span><a href="listaBukip.html"> Mieszkalne</a>
+                                        <span class="glyphicon glyphicon-home text-primary"></span><a href="bukips.html"> Mieszkalne</a>
                                     </td>
                                 </tr>
                                  <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-plane text-primary"></span><a href="listaUrbisPwik.html"> Usługowe</a>
+                                        <span class="glyphicon glyphicon-plane text-primary"></span><a href="urbisPwiks.html"> Usługowe</a>
                                     </td>
                                 </tr>
                            

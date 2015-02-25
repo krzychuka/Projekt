@@ -1,12 +1,16 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import model.Bukip;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,28 +30,31 @@ public class BukipController {
 	@Autowired
 	private ZuzycieBukipService zuzycieBukipService;
 	
-	@RequestMapping(value = "/bukip.html", method = RequestMethod.GET)
-	public String printMessage1(ModelMap model) {
+	@RequestMapping(value = "/bukip", method = RequestMethod.GET)
+	public ModelAndView bukipModel(@ModelAttribute("command") BukipBean bukipBean, BindingResult result) {
 
-		return "dodajBukip";
-
-	}
-	
-	@RequestMapping(value = "/listaBukip.html", method = RequestMethod.GET)
-	public String listaBukip(ModelMap model) {
-
-		return "listaBukip";
+		return new ModelAndView("dodajBukip");
 
 	}
 	
+	@RequestMapping(value = "/bukips.html", method = RequestMethod.GET)
+	public ModelAndView listaBukip() {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("bukips", prepareListOfBukipBean(bukipService.bukipList()));
+		return new ModelAndView("listaBukip", model);
+
+	}
+
 	@RequestMapping(value = "/saveBukip", method = RequestMethod.POST)
-	public ModelAndView saveBukip(@ModelAttribute("command") Bukip bukip, BindingResult result){
-		bukip.setBukipNazwa(bukip.getBukipNazwa());
-		bukip.setBukipAdres(bukip.getBukipAdres());
-		bukip.setBukipPowierzchnia(bukip.getBukipPowierzchnia());
-		bukip.setBukipLiczbaUzytkownikow(bukip.getBukipLiczbaUzytkownikow());
-		bukipService.addBukip(bukip);
-		return new ModelAndView("redirect:/bukip.html");
+	public ModelAndView saveBukip(@ModelAttribute("command") @Valid BukipBean bukipBean,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return new ModelAndView("dodajBukip");
+		} else {
+			Bukip bukip = prepareModel(bukipBean);
+			bukipService.addBukip(bukip);
+			return new ModelAndView("redirect:/bukips.html");
+		}
 	}
 	
 	@RequestMapping(value = "/deleteBukip", method = RequestMethod.GET)
@@ -63,11 +70,17 @@ public class BukipController {
 	public ModelAndView editBukip(
 			@ModelAttribute("command") BukipBean bukipBean, BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("bukip", prepareBukipBean(bukipService.getBukip(bukipBean.getBukipId())));
+		model.put("bukip", prepareBukipBean(bukipService.getBukip(bukipBean.getId())));
 		return new ModelAndView("dodajBukip", model);
 	}
 	
-	
+	@RequestMapping(value = "/otworzBukip", method = RequestMethod.GET)
+	public ModelAndView otworz(@ModelAttribute("command") BukipBean bukipBean,
+			BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("bukip", prepareBukipBean(bukipService.getBukip(bukipBean.getId())));
+		return new ModelAndView("szczegolyBukip", model);
+	}
 
 	private BukipBean prepareBukipBean(Bukip bukip) {
 		BukipBean bean = new BukipBean();
@@ -75,7 +88,7 @@ public class BukipController {
 		bean.setAdres(bukip.getBukipAdres());
 		bean.setLiczbaUzytkownikow(bukip.getBukipLiczbaUzytkownikow());
 		bean.setPowierzchnia(bukip.getBukipPowierzchnia());
-		bean.setBukipId(bukip.getBukipId());
+		bean.setId(bukip.getBukipId());
 		return bean;
 	}
 
@@ -85,8 +98,26 @@ public class BukipController {
 		bukip.setBukipAdres(bukipBean.getAdres());
 		bukip.setBukipLiczbaUzytkownikow(bukipBean.getLiczbaUzytkownikow());
 		bukip.setBukipPowierzchnia(bukipBean.getPowierzchnia());
-		bukip.setBukipId(bukipBean.getBukipId());
-		bukipBean.setBukipId(null);
+		bukip.setBukipId(bukipBean.getId());
+		bukipBean.setId(null);
 		return bukip;
+	}
+	
+	private List<BukipBean> prepareListOfBukipBean(List<Bukip> bukips) {
+		List<BukipBean> beans = null;
+		if (bukips != null && !bukips.isEmpty()) {
+			beans = new ArrayList<BukipBean>();
+			BukipBean bean = null;
+			for (Bukip bukip : bukips) {
+				bean = new BukipBean();
+				bean.setId(bukip.getBukipId());
+				bean.setNazwa(bukip.getBukipNazwa());
+				bean.setAdres(bukip.getBukipAdres());
+				bean.setPowierzchnia(bukip.getBukipPowierzchnia());
+				bean.setLiczbaUzytkownikow(bukip.getBukipLiczbaUzytkownikow());
+				beans.add(bean);
+			}
+		}
+		return beans;
 	}
 }

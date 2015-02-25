@@ -2,14 +2,16 @@ package bean;
 
 public class BupBean extends BudynekWzorzec{
 
-	private Long bupId;
+	private Long id;
 
-	public Long getBupId() {
-		return bupId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setBupId(Long bupId) {
-		this.bupId = bupId;
+	public void setId(Long id) {
+		this.id = id;
 	}
+
+	
 	
 }
