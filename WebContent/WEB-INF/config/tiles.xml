@@ -149,6 +149,22 @@
 		<put-attribute name="title" value="Projekt1"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/pages/szczegolyUrbisPwik.jsp"></put-attribute>
 	</definition>
+	<definition name="transport" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/transport.jsp"></put-attribute>
+	</definition>	
+	<definition name="oswietlenie" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/oswietlenie.jsp"></put-attribute>
+	</definition>	
+	<definition name="bie2013" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/bie2013.jsp"></put-attribute>
+	</definition>	
+	<definition name="biznes2013" extends="base.definition">
+		<put-attribute name="title" value="Projekt1"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/pages/biznes2013.jsp"></put-attribute>
+	</definition>	
 	<definition name="dodajTest" extends="base.definition">
 		<put-attribute name="title" value="Projekt1"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/pages/dodajTest.jsp"></put-attribute>

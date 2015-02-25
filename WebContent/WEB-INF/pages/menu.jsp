@@ -83,12 +83,12 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-road text-primary"></span><a href="listaObiektow.html"> Transport</a>
+                                        <span class="glyphicon glyphicon-road text-primary"></span><a href="transport.html"> Transport</a>
                                     </td>
                                 </tr>
                                  <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-off  text-primary"></span><a href="listaObiektow.html"> Oświetlenie</a>
+                                        <span class="glyphicon glyphicon-off  text-primary"></span><a href="oswietlenie.html"> Oświetlenie</a>
                                     </td>
                                 </tr>
                                  <tr>
@@ -141,6 +141,16 @@
                     <div id="collapseFour" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <table class="table">
+                            <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-list-alt text-primary"></span><a href="biznes2013.html"> Raport Biznes 2013</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-list-alt text-primary"></span><a href="bie2013.html"> Raport BIE 2013</a>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-list-alt text-primary"></span><a href="calkowiteZuzycie.html"> Całkowite zużycie</a>
